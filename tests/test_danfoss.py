@@ -1,7 +1,9 @@
 """Tests the Danfoss quirk (all tests were written for the Popp eT093WRO)."""
+
 from unittest import mock
 
 from zigpy.quirks import CustomCluster
+import zigpy.types as t
 from zigpy.zcl import foundation
 from zigpy.zcl.clusters.hvac import Thermostat
 from zigpy.zcl.foundation import WriteAttributesStatusRecord, ZCLAttributeDef
@@ -54,8 +56,7 @@ async def test_danfoss_time_bind(zigpy_device_from_quirk):
 
     def mock_write(attributes, manufacturer=None):
         records = [
-            WriteAttributesStatusRecord(foundation.Status.SUCCESS)
-            for _ in attributes
+            WriteAttributesStatusRecord(foundation.Status.SUCCESS) for _ in attributes
         ]
         return [records, []]
 
@@ -81,8 +82,7 @@ async def test_danfoss_thermostat_write_attributes(zigpy_device_from_quirk):
 
     def mock_write(attributes, manufacturer=None):
         records = [
-            WriteAttributesStatusRecord(foundation.Status.SUCCESS)
-            for _ in attributes
+            WriteAttributesStatusRecord(foundation.Status.SUCCESS) for _ in attributes
         ]
         return [records, []]
 
@@ -126,9 +126,9 @@ async def test_danfoss_thermostat_write_attributes(zigpy_device_from_quirk):
             assert operation == 0x01
             assert setting == 6
 
-            danfoss_thermostat_cluster._attr_cache[
-                0x0015
-            ] = 5  # min_limit is present normally
+            danfoss_thermostat_cluster._attr_cache[0x0015] = (
+                5  # min_limit is present normally
+            )
 
             success, fail = await danfoss_thermostat_cluster.write_attributes(
                 {"system_mode": 0x00}
@@ -162,8 +162,8 @@ async def test_customized_standardcluster(zigpy_device_from_quirk):
     ) == [[4545, 345], [5433, 45355]]
 
     mock_attributes = {
-        656: ZCLAttributeDef(is_manufacturer_specific=True),
-        56454: ZCLAttributeDef(is_manufacturer_specific=False),
+        656: ZCLAttributeDef(type=t.uint8_t, is_manufacturer_specific=True),
+        56454: ZCLAttributeDef(type=t.uint8_t, is_manufacturer_specific=False),
     }
 
     danfoss_thermostat_cluster.attributes = mock_attributes

@@ -164,6 +164,52 @@ class TuyaZemismartTS130F(CustomDevice):
     }
 
 
+class TuyaZemismartWNEC1ETS130F(CustomDevice):
+    """Tuya ZemiSmart smart curtain roller shutter. WN-EC1E version."""
+
+    signature = {
+        MODEL: "TS130F",
+        ENDPOINTS: {
+            1: {
+                PROFILE_ID: zha.PROFILE_ID,
+                DEVICE_TYPE: zha.DeviceType.WINDOW_COVERING_DEVICE,
+                INPUT_CLUSTERS: [
+                    Basic.cluster_id,
+                    Identify.cluster_id,
+                    Groups.cluster_id,
+                    Scenes.cluster_id,
+                    OnOff.cluster_id,
+                    WindowCovering.cluster_id,
+                ],
+                OUTPUT_CLUSTERS: [
+                    Time.cluster_id,
+                    Ota.cluster_id,
+                ],
+            },
+        },
+    }
+    replacement = {
+        ENDPOINTS: {
+            1: {
+                PROFILE_ID: zha.PROFILE_ID,
+                DEVICE_TYPE: zha.DeviceType.WINDOW_COVERING_DEVICE,
+                INPUT_CLUSTERS: [
+                    Basic.cluster_id,
+                    Identify.cluster_id,
+                    Groups.cluster_id,
+                    Scenes.cluster_id,
+                    TuyaWithBacklightOnOffCluster,
+                    TuyaCoveringCluster,
+                ],
+                OUTPUT_CLUSTERS: [
+                    Time.cluster_id,
+                    Ota.cluster_id,
+                ],
+            },
+        },
+    }
+
+
 class TuyaTS130FTOGP(CustomDevice):
     """Tuya Oxt smart curtain roller shutter."""
 
@@ -269,6 +315,7 @@ class TuyaTS130FTI2(CustomDevice):
         },
     }
 
+
 class TuyaTS130FUL(CustomDevice):
     """Tuya Cover variant from UseeLink."""
 
@@ -308,6 +355,7 @@ class TuyaTS130FUL(CustomDevice):
             },
         },
     }
+
 
 class TuyaTS130FTO(CustomDevice):
     """Tuya smart curtain roller shutter Time Out."""
