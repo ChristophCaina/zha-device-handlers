@@ -347,9 +347,10 @@ class PlugMAEU01Alt3(PlugMAEU01):
 
     replacement = PlugMAEU01.replacement
 
+
 class PlugAEU001(PlugMAEU01):
     """lumi.plug.aeu001 plug H2 EU"""
-    
+
     signature = {
         MODELS_INFO: [
             (LUMI, "lumi.plug.aeu001"),
@@ -372,7 +373,7 @@ class PlugAEU001(PlugMAEU01):
                     TemperatureMeasurement.cluster_id,
                     Metering.cluster_id,
                     ElectricalMeasurement.cluster_id,
-                    0xfcc0,
+                    0xFCC0,
                 ],
                 OUTPUT_CLUSTERS: [
                     Time.cluster_id,
@@ -401,7 +402,7 @@ class PlugAEU001(PlugMAEU01):
             },
         },
     }
-    
+
     replacement = {
         ENDPOINTS: {
             1: {
@@ -438,7 +439,7 @@ class PlugAEU001(PlugMAEU01):
                 INPUT_CLUSTERS: [
                     AnalogInputCluster,
                 ],
-                OUTPUT_CLUSTERS:[],
+                OUTPUT_CLUSTERS: [],
             },
         },
     }
